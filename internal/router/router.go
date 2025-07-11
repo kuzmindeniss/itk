@@ -11,7 +11,7 @@ func SetupRouter(walletHandler *handler.WalletHandler) *gin.Engine {
 	v1 := r.Group("/api/v1")
 
 	v1.POST("/wallet", walletHandler.UpdateWalletBalance)
-	v1.GET("/wallet/:id", walletHandler.GetWallet)
+	v1.GET("/wallets/:id", walletHandler.GetWallet)
 
 	return r
 }
