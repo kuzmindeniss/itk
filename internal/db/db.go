@@ -46,8 +46,8 @@ func RunMigrations(cfg *config.Config) error {
 		return fmt.Errorf("failed to run schema migrations: %w", err)
 	}
 
-	if err := goose.Up(db, "internal/db/sql/migrations"); err != nil {
-		return fmt.Errorf("failed to run migrations: %w", err)
+	if err := goose.Up(db, "internal/db/sql/seeds"); err != nil {
+		return fmt.Errorf("failed to run seeds: %w", err)
 	}
 
 	return nil
