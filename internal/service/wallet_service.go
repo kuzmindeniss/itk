@@ -7,11 +7,21 @@ import (
 	"github.com/kuzmindeniss/itk/internal/db/repository"
 )
 
-type WalletService struct {
-	repo *repository.Queries
+type WalletRepositoryInterface interface {
+	GetWalletByID(ctx context.Context, id uuid.UUID) (repository.Wallet, error)
+	UpdateWallet(ctx context.Context, arg repository.UpdateWalletParams) (repository.Wallet, error)
 }
 
-func NewWalletService(repo *repository.Queries) *WalletService {
+type WalletServiceInterface interface {
+	GetWalletByID(ctx context.Context, id uuid.UUID) (repository.Wallet, error)
+	TopUpWalletBalance(ctx context.Context, id uuid.UUID, amount int32) (repository.Wallet, error)
+}
+
+type WalletService struct {
+	repo WalletRepositoryInterface
+}
+
+func NewWalletService(repo WalletRepositoryInterface) *WalletService {
 	return &WalletService{
 		repo: repo,
 	}
